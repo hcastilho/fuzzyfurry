@@ -1,0 +1,8 @@
+# requirements/development.txt
+-r common.txt
+Fabric==1.7.0
+fabtools==0.15.0
+#lxml==2.3.4
+#pyst2==0.4
+#South==0.7.4
+#Sphinx==1.1.3

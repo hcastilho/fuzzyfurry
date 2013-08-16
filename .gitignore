@@ -1,0 +1,7 @@
+*.pyc
+*.swo
+*.swp
+*.swn
+
+private.py
+database.py
