@@ -146,13 +146,22 @@ def start_gunicorn():
     #run('supervisor fuzzyfurry_gunicorn start')
 
 @task
+def restart_gunicorn():
+    fabtools.supervisor.restart_process('gunicorn')
+
+@task
 def deploy_static():
     with cd(env.project_root):
         run('./manage.py collectstatic -v0 --noinput')
 
 @task
 def deploy_project():
-    rsync_project(remote_dir=env.webapps_path)
+    rsync_project(remote_dir = env.webapps_path,
+            exclude = [
+                '.vagrant/',
+                '.git/',
+                '.gitignore',
+                ])
     sudo('chown :%s %s' % ('www-data', '/webapps/fuzzyfurry/scripts/start_gunicorn.sh'))
 
 @task
